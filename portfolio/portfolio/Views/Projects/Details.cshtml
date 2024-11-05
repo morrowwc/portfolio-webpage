@@ -25,7 +25,10 @@
             </div>
         }
         <p class="mt-4">
-            <a href="@Model.URL" class="btn btn-info">Project Link</a>
+            @foreach (var url in Model.URLs)
+            {
+                <a href="@url" class="btn btn-info">@url</a>
+            }
         </p>
         <a href="@Url.Action("Index")" class="btn btn-secondary">Back to List</a>
     </div>

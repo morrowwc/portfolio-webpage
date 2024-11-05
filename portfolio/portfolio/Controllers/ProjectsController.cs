@@ -15,66 +15,21 @@ namespace portfolio.Controllers
             {
                 new Project
                 {
-                    Id = 1,
-                    Name = "Project One",
-                    Description = "Description of project one.",
-                    Type = "Programming",
-                    Images = LoadImages("Assets/TestProject"),
-                    URL = "https://example.com/project-one"
+                    Name = "Project 3",
+                    Description = "This project was my first shot at using a database and chatGPTs API.",
+                    Type = "CS 330 - Web Development",
+                    Images = LoadImages("Assets/Project3"),
+                    URLs = ["https://github.com/morrowwc/Fall2024-Assignment3-wcmorrow2",
+                            "https://fall2024-assignment3-wcmorrow2.azurewebsites.net/"]
                 },
                 new Project
                 {
-                    Id = 2,
                     Name = "Project Two",
                     Description = "Description of project two.",
                     Type = "Art",
                     Images = LoadImages("Assets/TestProject"),
-                    URL = "https://example.com/project-two"
-                },
-                new Project
-                {
-                    Id = 3,
-                    Name = "Project Two",
-                    Description = "Description of project two.",
-                    Type = "Art",
-                    Images = LoadImages("Assets/TestProject"),
-                    URL = "https://example.com/project-two"
-                },
-                new Project
-                {
-                    Id = 4,
-                    Name = "Project Two",
-                    Description = "Description of project two.",
-                    Type = "Art",
-                    Images = LoadImages("Assets/TestProject"),
-                    URL = "https://example.com/project-two"
-                },
-                new Project
-                {
-                    Id = 5,
-                    Name = "Project One",
-                    Description = "Description of project one.",
-                    Type = "Programming",
-                    Images = LoadImages("Assets/TestProject"),
-                    URL = "https://example.com/project-one"
-                },
-                new Project
-                {
-                    Id = 6,
-                    Name = "Project One",
-                    Description = "Description of project one.",
-                    Type = "Programming",
-                    Images = LoadImages("Assets/TestProject"),
-                    URL = "https://example.com/project-one"
-                },new Project
-                {
-                    Id = 7,
-                    Name = "Project One",
-                    Description = "Description of project one.",
-                    Type = "Programming",
-                    Images = LoadImages("Assets/TestProject"),
-                    URL = "https://example.com/project-one"
-                },
+                    URLs = ["https://example.com/project-two"]
+                }
             };
             return projects;
         }

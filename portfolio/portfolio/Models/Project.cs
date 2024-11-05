@@ -6,8 +6,6 @@ namespace portfolio.Models
 {
     public class Project
     {
-        [Key]
-        public int Id { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
@@ -16,7 +14,7 @@ namespace portfolio.Models
         public string Type { get; set; }
         [Required]
         public List<byte[]> Images { get; set; }
-
-        public string? URL { get; set; }
+        [Required]
+        public List<string> URLs { get; set; }
     }
 }
