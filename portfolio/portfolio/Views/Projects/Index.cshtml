@@ -4,41 +4,55 @@
     ViewData["Title"] = "Index";
 }
 
-
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <nav id="sidebar">
-                <ul class="list-unstyled">
-                    @foreach (var type in Model.Keys)
-                    {
-                        <li><a href="#@type.Replace(" ", "")">@type</a></li>
-                    }
-                </ul>
-            </nav>
+            <div class="card shadow mb-4 position-fixed" style="width: 15%;">
+                <div class="card-header py-3">
+                    <div class="m-0 font-weight-bold text-primary">
+                        Navigation
+                    </div>
+                </div>
+                <div class="card-body">
+                    <nav id="sidebar">
+                        <ul class="list-unstyled">
+                            @foreach (var type in Model.Keys)
+                            {
+                                <li><a href="#@type.Replace(" ", "")">@type</a></li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-9 offset-md-3">
             @foreach (var typeGroup in Model)
             {
-                <h2 id="@typeGroup.Key.Replace(" ", "")">@typeGroup.Key</h2>
+                <h2 id="@typeGroup.Key.Replace(" ", "")" class="mt-4">@typeGroup.Key</h2>
                 @foreach (var project in typeGroup.Value)
                 {
-                    <div class="project">
-                        <h3>@project.Name</h3>
-                        <p>@project.Description</p>
-                        @if (project.Images != null && project.Images.Count > 0)
-                        {
-                            <div class="project-images">
-                                @foreach (var image in project.Images)
-                                {
-                                    <img src="data:image;base64,@Convert.ToBase64String(image)" alt="Project Image" width="200" />
-                                }
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <div class="m-0 font-weight-bold text-primary">
+                                <h3 class="m-0 font-weight-bold text-primary">@project.Name</h3>
                             </div>
-                        }
-                        @if (!string.IsNullOrEmpty(project.URL))
-                        {
-                            <p><a href="@project.URL" target="_blank">View Project</a></p>
-                        }
+                        </div>
+                        <div class="card-body">
+                            <p>@project.Description</p>
+                            @if (project.Images != null && project.Images.Count > 0)
+                            {
+                                <div class="project-images">
+                                    @foreach (var image in project.Images)
+                                    {
+                                        <img src="data:image;base64,@Convert.ToBase64String(image)" alt="Project Image" class="img-fluid rounded mb-2" />
+                                    }
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(project.URL))
+                            {
+                                <p><a href="@project.URL" target="_blank" class="btn btn-info">View Project</a></p>
+                            }
+                        </div>
                     </div>
                 }
             }

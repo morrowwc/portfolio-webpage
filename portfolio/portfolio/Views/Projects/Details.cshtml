@@ -4,17 +4,29 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>@Model.Name</h2>
-<p>@Model.Description</p>
-@if (Model.Images != null && Model.Images.Count > 0)
-{
-    <h3>Images</h3>
-    @foreach (var image in Model.Images)
-    {
-        <img src="data:image;base64,@Convert.ToBase64String(image)" alt="Project Image" width="200" />
-    }
-}
-<p>
-    <a href="@Model.URL">Project Link</a>
-</p>
-<a href="@Url.Action("Index")" class="btn btn-primary">Back to List</a>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <div class="m-0 font-weight-bold text-primary">
+            <h2 class="m-0 font-weight-bold text-primary">@Model.Name</h2>
+        </div>
+    </div>
+    <div class="card-body">
+        <p>@Model.Description</p>
+        @if (Model.Images != null && Model.Images.Count > 0)
+        {
+            <h3 class="font-weight-bold">Images</h3>
+            <div class="row">
+                @foreach (var image in Model.Images)
+                {
+                    <div class="col-md-3 mb-4">
+                        <img src="data:image;base64,@Convert.ToBase64String(image)" alt="Project Image" class="img-fluid rounded" />
+                    </div>
+                }
+            </div>
+        }
+        <p class="mt-4">
+            <a href="@Model.URL" class="btn btn-info">Project Link</a>
+        </p>
+        <a href="@Url.Action("Index")" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>
