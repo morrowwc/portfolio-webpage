@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using portfolio.Models;
 
 namespace portfolio.Data
 {
@@ -9,5 +10,6 @@ namespace portfolio.Data
             : base(options)
         {
         }
+        public DbSet<portfolio.Models.Project> Project { get; set; } = default!;
     }
 }
