@@ -1,39 +1,108 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using portfolio.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace portfolio.Controllers
 {
-    public class ProjectController : Controller
+    public class ProjectsController : Controller
     {
-        private static List<Project> _projects = new List<Project>
-        {
-            new Project
-            {
-                Id = 1,
-                Name = "Project One",
-                Description = "Description of project one.",
-                Images = new List<byte[]>(), // Add byte array images here
-                URL = "https://example.com/project-one"
-            },
-            new Project
-            {
-                Id = 2,
-                Name = "Project Two",
-                Description = "Description of project two.",
-                Images = new List<byte[]>(), // Add byte array images here
-                URL = "https://example.com/project-two"
-            }
-            // Add more projects as needed
-        };
+        private static List<Project> _projects = InitializeProjects();
 
-        // GET: ProjectController
-        public ActionResult Index()
+        private static List<Project> InitializeProjects()
         {
-            return View(_projects);
+            var projects = new List<Project>
+            {
+                new Project
+                {
+                    Id = 1,
+                    Name = "Project One",
+                    Description = "Description of project one.",
+                    Type = "Programming",
+                    Images = LoadImages("Assets/TestProject"),
+                    URL = "https://example.com/project-one"
+                },
+                new Project
+                {
+                    Id = 2,
+                    Name = "Project Two",
+                    Description = "Description of project two.",
+                    Type = "Art",
+                    Images = LoadImages("Assets/TestProject"),
+                    URL = "https://example.com/project-two"
+                },
+                new Project
+                {
+                    Id = 3,
+                    Name = "Project Two",
+                    Description = "Description of project two.",
+                    Type = "Art",
+                    Images = LoadImages("Assets/TestProject"),
+                    URL = "https://example.com/project-two"
+                },
+                new Project
+                {
+                    Id = 4,
+                    Name = "Project Two",
+                    Description = "Description of project two.",
+                    Type = "Art",
+                    Images = LoadImages("Assets/TestProject"),
+                    URL = "https://example.com/project-two"
+                },
+                new Project
+                {
+                    Id = 5,
+                    Name = "Project One",
+                    Description = "Description of project one.",
+                    Type = "Programming",
+                    Images = LoadImages("Assets/TestProject"),
+                    URL = "https://example.com/project-one"
+                },
+                new Project
+                {
+                    Id = 6,
+                    Name = "Project One",
+                    Description = "Description of project one.",
+                    Type = "Programming",
+                    Images = LoadImages("Assets/TestProject"),
+                    URL = "https://example.com/project-one"
+                },new Project
+                {
+                    Id = 7,
+                    Name = "Project One",
+                    Description = "Description of project one.",
+                    Type = "Programming",
+                    Images = LoadImages("Assets/TestProject"),
+                    URL = "https://example.com/project-one"
+                },
+            };
+            return projects;
         }
 
-        // GET: ProjectController/Details/5
+        private static List<byte[]> LoadImages(string folderPath)
+        {
+            var images = new List<byte[]>();
+            var absolutePath = Path.Combine(Directory.GetCurrentDirectory(), folderPath);
+
+            if (Directory.Exists(absolutePath))
+            {
+                foreach (var filePath in Directory.GetFiles(absolutePath))
+                {
+                    images.Add(System.IO.File.ReadAllBytes(filePath));
+                }
+            }
+            return images;
+        }
+
+        // GET: ProjectsController
+        public ActionResult Index()
+        {
+            var groupedProjects = _projects.GroupBy(p => p.Type)
+                                           .ToDictionary(g => g.Key, g => g.ToList());
+            return View(groupedProjects);
+        }
+
+        // GET: ProjectsController/Details/5
         public ActionResult Details(int id)
         {
             var project = _projects.FirstOrDefault(p => p.Id == id);
