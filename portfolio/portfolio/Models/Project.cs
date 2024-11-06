@@ -6,10 +6,15 @@ namespace portfolio.Models
 {
     public class Project
     {
+        [Key]
+        public Guid Id { get; set; }
         [Required]
         public string Name { get; set; }
+
         [Required]
-        public string Description { get; set; }
+        public string TagDescription { get; set; }
+        [Required]
+        public string FullDescription { get; set; }
         [Required]
         public string Type { get; set; }
         [Required]

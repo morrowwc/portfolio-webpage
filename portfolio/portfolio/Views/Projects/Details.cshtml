@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="card-body">
-        <p>@Model.Description</p>
+        <p>@Model.FullDescription</p>
         @if (Model.Images != null && Model.Images.Count > 0)
         {
             <h3 class="font-weight-bold">Images</h3>
@@ -27,7 +27,7 @@
         <p class="mt-4">
             @foreach (var url in Model.URLs)
             {
-                <a href="@url" class="btn btn-info">@url</a>
+                <a href="@url" class="link-primary">@url</a>
             }
         </p>
         <a href="@Url.Action("Index")" class="btn btn-secondary">Back to List</a>

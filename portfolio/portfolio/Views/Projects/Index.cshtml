@@ -4,57 +4,54 @@
     ViewData["Title"] = "Index";
 }
 
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-md-3">
-            <div class="card shadow mb-4 position-fixed" style="width: 15%;">
-                <div class="card-header py-3">
-                    <div class="m-0 font-weight-bold text-primary">
-                        Navigation
-                    </div>
-                </div>
-                <div class="card-body">
-                    <nav id="sidebar">
-                        <ul class="list-unstyled">
-                            @foreach (var type in Model.Keys)
-                            {
-                                <li><a href="#@type.Replace(" ", "")">@type</a></li>
-                            }
-                        </ul>
-                    </nav>
-                </div>
+        <!-- Sidebar -->
+        <nav id="sidebar" class="col-md-3 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <h5 class="sidebar-heading">Navigation</h5>
+                <ul class="nav flex-column">
+                    @foreach (var type in Model.Keys)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="#@type.Replace(" ", "")">@type</a>
+                        </li>
+                    }
+                </ul>
             </div>
-        </div>
-        <div class="col-md-9 offset-md-3">
+        </nav>
+
+        <!-- Main content -->
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             @foreach (var typeGroup in Model)
             {
-                <div class="m-0 font-weight-bold text-primary">
-                    <h2 id="@typeGroup.Key.Replace(" ", "")" class="mt-4">@typeGroup.Key</h2>
-                </div>
-                @foreach (var project in typeGroup.Value)
-                {
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <div class="m-0 font-weight-bold">
-                                <h3 class="m-0 font-weight-bold">@project.Name</h3>
+                <section id="@typeGroup.Key.Replace(" ", "")">
+                    <h2 class="mt-4">@typeGroup.Key</h2>
+                    @foreach (var project in typeGroup.Value)
+                    {
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <div class="m-0 font-weight-bold">
+                                    <h3 class="m-0 font-weight-bold">@project.Name</h3>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p>@project.TagDescription</p>
+                                @if (project.Images != null && project.Images.Count > 0)
+                                {
+                                    <div class="project-images position-relative">
+                                        <img src="data:image;base64,@Convert.ToBase64String(project.Images.First())" alt="Project Image" class="img-fluid rounded mb-2" />
+                                        <div class="overlay">
+                                            <div class="text-white">+@(project.Images.Count - 1)</div>
+                                        </div>
+                                    </div>
+                                }
+                                <p><a href="@Url.Action("Details", new { id = project.Id })" class="btn btn-secondary">View Project</a></p>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <p>@project.Description</p>
-                            @if (project.Images != null && project.Images.Count > 0)
-                            {
-                                <div class="project-images position-relative">
-                                    <img src="data:image;base64,@Convert.ToBase64String(project.Images.First())" alt="Project Image" class="img-fluid rounded mb-2" />
-                                    <div class="overlay">
-                                        <div class="text-white">+@(project.Images.Count - 1)</div>
-                                    </div>
-                                </div>
-                            }
-                            <p><a href="@Url.Action("Details", new { id = project.Id })" class="btn btn-info">View Project</a></p>
-                        </div>
-                    </div>
-                }
+                    }
+                </section>
             }
-        </div>
+        </main>
     </div>
 </div>

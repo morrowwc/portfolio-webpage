@@ -15,8 +15,13 @@ namespace portfolio.Controllers
             {
                 new Project
                 {
+                    Id = Guid.NewGuid(),
                     Name = "Project 3",
-                    Description = "This project was my first shot at using a database and chatGPTs API.",
+                    TagDescription = "This project was the class's introduction into databases.",
+                    FullDescription = "This was obviously the third project in CS 330 at Alabama. The outline of the project was to implement a website that could store Actors and Movies and associated date, like IMDB. " +
+                    "There also needed to be AI generated reviews for the movies and tweets about the actors. We also used a sentiment analysis tool called VaderSharp2. All of this would need to be stored in a database using Azure.\n\n " +
+                    "I had already taken a class on databases, but this was my first time implementing one. I was also still getting used to Azure and managing the resources for the project, but" +
+                    "Azure (Microsoft) has a deal with OpenAI making the API really easy to use. ",
                     Type = "CS 330 - Web Development",
                     Images = LoadImages("Assets/Project3"),
                     URLs = ["https://github.com/morrowwc/Fall2024-Assignment3-wcmorrow2",
@@ -24,8 +29,10 @@ namespace portfolio.Controllers
                 },
                 new Project
                 {
+                    Id = Guid.NewGuid(),
                     Name = "Project Two",
-                    Description = "Description of project two.",
+                    TagDescription = "Description of project two.",
+                    FullDescription = "Description of project two.",
                     Type = "Art",
                     Images = LoadImages("Assets/TestProject"),
                     URLs = ["https://example.com/project-two"]
@@ -58,7 +65,7 @@ namespace portfolio.Controllers
         }
 
         // GET: ProjectsController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(Guid id)
         {
             var project = _projects.FirstOrDefault(p => p.Id == id);
             if (project == null)
